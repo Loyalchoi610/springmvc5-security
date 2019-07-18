@@ -1,5 +1,9 @@
 package com.forestvue.controller;
 
+import com.forestvue.domain.MemberVO;
+import com.forestvue.security.JwtGenerator;
+import com.forestvue.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +15,31 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    JwtGenerator jwtGenerator;
+
+    @Autowired
+    MemberService memberService;
+
     @GetMapping(value="/")
     public String index(){
         return "index";
+
     }
-    @GetMapping(value = "/ajaxLogin")
+
+    @GetMapping("/jwt")
+    @ResponseBody
+    public Object jwt(){
+        Map<String,String> obj = new HashMap<>();
+        MemberVO memberVO = memberService.getUserByName("spring");
+        obj.put("jwt",jwtGenerator.generateToken(memberVO));
+        return obj;
+    }
+
+    @GetMapping(value = "/ajaxlogin")
     public String login(){
-        return "ajaxLogin";
+        return "ajaxlogin";
     }
     @GetMapping(value = "/register")
     public String register(){
