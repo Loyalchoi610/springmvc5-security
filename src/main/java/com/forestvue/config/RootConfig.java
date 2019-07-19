@@ -12,17 +12,18 @@ import org.springframework.context.annotation.Configuration;
 import oracle.jdbc.driver.OracleDriver;
 import javax.sql.DataSource;
 
+
 @Configuration
-@ComponentScan(basePackages = "com.forestvue.service")
+@ComponentScan(basePackages = "com.forestvue.*")
 @MapperScan(basePackages = {"com.forestvue.mapper"})
 public class RootConfig {
     @Bean
     public DataSource dataSource(){
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-        hikariConfig.setJdbcUrl("jdbc:log4jdbc:oracle:thin:@localhost:1521:XE");
-        hikariConfig.setUsername("book_ex");
-        hikariConfig.setPassword("book_ex");
+        hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springhouse?useSSL=false");
+        hikariConfig.setUsername("springhouse");
+        hikariConfig.setPassword("springhouse");
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         return dataSource;
     }
