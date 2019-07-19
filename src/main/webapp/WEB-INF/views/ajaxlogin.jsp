@@ -15,7 +15,7 @@
             value: '${_csrf.token}'
         }
     </script>
-    <script type="text/javascript" src="/resources/ajaxLogin.js"></script>
+    <script type="text/javascript" src="/resources/ajaxlogin.js"></script>
 </head>
 <body>
     <h1>로그인 페이지</h1>
@@ -30,5 +30,6 @@
 
     <button id="doLogin" type="button">Login</button>
     <div id="message"></div>
+    <a href="/">홈으로</a>
 </body>
 </html>
